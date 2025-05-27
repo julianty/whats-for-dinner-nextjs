@@ -5,16 +5,15 @@ import type { Restaurant } from "../../generated/prisma";
 import RestaurantCard from "@/ui/components/restaurantCard";
 import { Button, Container, Flex, Section } from "@radix-ui/themes";
 import { restaurantMockData } from "@/data/mockData";
+import { createSessionAction } from "@/lib/actions";
+
 export default function Home() {
-  // State for added restaurants
   const [selectedRestaurants, setSelectedRestaurants] = useState<Restaurant[]>(
     []
   );
 
-  // Callback to add a restaurant to the state
   const addRestaurant = (restaurant: Restaurant) => {
     setSelectedRestaurants((prev) => {
-      // Prevent duplicates by id
       if (prev.some((r) => r.id === restaurant.id)) return prev;
       return [...prev, restaurant];
     });
@@ -24,7 +23,7 @@ export default function Home() {
     <main>
       <Container size="2">
         <Section>
-          <Flex direction={"column"} gap={"3"}>
+          <Flex direction="column" gap="3">
             <h1 className="text-4xl">Welcome to What&apos;s for Dinner!</h1>
             <p>
               This is a simple app that helps you decide what to have for
@@ -34,39 +33,49 @@ export default function Home() {
           </Flex>
         </Section>
         <Section>
-          <Flex wrap="wrap" gap={"3"}>
+          <Flex wrap="wrap" gap="3">
             <p>
               Let&apos;s get started by selecting a restaurant from the list
               below. You can add your own restaurants by clicking the &quot;Add
               Restaurant&quot; button.
             </p>
-            {restaurantMockData.map((restaurant) => {
-              return (
+            {restaurantMockData
+              .filter(
+                (restaurant) =>
+                  !selectedRestaurants.some((r) => r.id === restaurant.id)
+              )
+              .map((restaurant) => (
                 <RestaurantCard
                   {...restaurant}
                   key={restaurant.id}
                   onImageClick={() => addRestaurant(restaurant)}
                 />
-              );
-            })}
-            <Button>Add Option</Button>
+              ))}
           </Flex>
+          <Button>Add Option</Button>
         </Section>
         {/* Debug output */}
         <Section>
-          <div
-            style={{
-              background: "#222",
-              color: "#fff",
-              padding: 12,
-              borderRadius: 8,
-              marginTop: 16,
-            }}
-          >
+          <div className="bg-[#222] text-white p-3 rounded mt-4">
             <strong>Selected Restaurants (debug):</strong>
-            <pre style={{ whiteSpace: "pre-wrap", wordBreak: "break-all" }}>
+            <pre className="whitespace-pre-wrap break-all">
               {JSON.stringify(selectedRestaurants, null, 2)}
             </pre>
+            {selectedRestaurants.length > 0 && (
+              <form action={createSessionAction}>
+                {selectedRestaurants.map((r) => (
+                  <input
+                    key={r.id}
+                    type="hidden"
+                    name="restaurantIds"
+                    value={r.id}
+                  />
+                ))}
+                <Button type="submit" className="mt-4">
+                  Create Session
+                </Button>
+              </form>
+            )}
           </div>
         </Section>
       </Container>
