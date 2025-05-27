@@ -1,9 +1,25 @@
 "use client";
 
+import React, { useState } from "react";
+import type { Restaurant } from "../../generated/prisma";
 import RestaurantCard from "@/ui/components/restaurantCard";
 import { Button, Container, Flex, Section } from "@radix-ui/themes";
 import { restaurantMockData } from "@/data/mockData";
 export default function Home() {
+  // State for added restaurants
+  const [selectedRestaurants, setSelectedRestaurants] = useState<Restaurant[]>(
+    []
+  );
+
+  // Callback to add a restaurant to the state
+  const addRestaurant = (restaurant: Restaurant) => {
+    setSelectedRestaurants((prev) => {
+      // Prevent duplicates by id
+      if (prev.some((r) => r.id === restaurant.id)) return prev;
+      return [...prev, restaurant];
+    });
+  };
+
   return (
     <main>
       <Container size="2">
@@ -25,10 +41,33 @@ export default function Home() {
               Restaurant&quot; button.
             </p>
             {restaurantMockData.map((restaurant) => {
-              return <RestaurantCard {...restaurant} key={restaurant.id} />;
+              return (
+                <RestaurantCard
+                  {...restaurant}
+                  key={restaurant.id}
+                  onImageClick={() => addRestaurant(restaurant)}
+                />
+              );
             })}
             <Button>Add Option</Button>
           </Flex>
+        </Section>
+        {/* Debug output */}
+        <Section>
+          <div
+            style={{
+              background: "#222",
+              color: "#fff",
+              padding: 12,
+              borderRadius: 8,
+              marginTop: 16,
+            }}
+          >
+            <strong>Selected Restaurants (debug):</strong>
+            <pre style={{ whiteSpace: "pre-wrap", wordBreak: "break-all" }}>
+              {JSON.stringify(selectedRestaurants, null, 2)}
+            </pre>
+          </div>
         </Section>
       </Container>
     </main>
