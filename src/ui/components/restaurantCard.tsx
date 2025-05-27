@@ -28,42 +28,18 @@ function RestaurantCard({
       >
         <Flex direction="column" gap={"4"}>
           <Box
-            style={{
-              position: "relative",
-              width: 150,
-              height: 150,
-              margin: "0 auto",
-            }}
+            className="relative w-[150px] h-[150px] mx-auto"
             onClick={onImageClick}
           >
             <Image
               src={imageUrl || ""}
-              alt="In-N-Out"
+              alt="In-N-Out" // TODO: Change this to read in the alt text from data
               width={150}
               height={150}
-              style={{ borderRadius: 8 }}
+              className="rounded"
             />
             {isHovered && (
-              <Box
-                style={{
-                  position: "absolute",
-                  top: 0,
-                  left: 0,
-                  width: "100%",
-                  height: "100%",
-                  background: "rgba(0,0,0,0.75)",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  borderRadius: 8,
-                  color: "#fff",
-                  fontWeight: 600,
-                  fontSize: "1.1rem",
-                  letterSpacing: 1,
-                  zIndex: 2,
-                  transition: "background 0.2s",
-                }}
-              >
+              <Box className="absolute inset-0 bg-black/75 flex items-center justify-center rounded text-white">
                 add to list
               </Box>
             )}
