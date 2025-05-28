@@ -19,6 +19,7 @@ async function main() {
       prisma.user.create({
         data: {
           name: faker.person.firstName(),
+          email: faker.internet.email(),
         },
       })
     )
@@ -40,7 +41,7 @@ async function main() {
         data: {
           name,
           description: `A popular ${faker.food.ethnicCategory()} restaurant known for their ${faker.food.dish()}.`,
-          imageUrl: faker.image.urlPicsumPhotos({ width: 400, height: 300 }),
+          imageUrl: faker.image.urlPicsumPhotos({ width: 300, height: 300 }),
         },
       });
     })

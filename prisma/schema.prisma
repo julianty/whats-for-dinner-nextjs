@@ -26,6 +26,7 @@ model User {
   id    String @id @default(uuid())
   name  String
   sessions SessionUser[]
+  email String
 }
 
 model Session {
