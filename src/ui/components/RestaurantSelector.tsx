@@ -41,6 +41,7 @@ export default function RestaurantSelector({
               <RestaurantCard
                 {...restaurant}
                 key={restaurant.id}
+                variant="horizontal"
                 onImageClick={() => addRestaurant(restaurant)}
               />
             ))}
