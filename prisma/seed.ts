@@ -18,7 +18,7 @@ async function main() {
     Array.from({ length: NUM_USERS }).map(() =>
       prisma.user.create({
         data: {
-          name: faker.person.fullName(),
+          name: faker.person.firstName(),
         },
       })
     )

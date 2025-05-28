@@ -108,3 +108,8 @@ export async function createSessionAction(formData: FormData): Promise<void> {
     redirect(`/sessions/${session.id}`);
   }
 }
+
+// Get all restaurants
+export async function getAllRestaurants() {
+  return prisma.restaurant.findMany();
+}
