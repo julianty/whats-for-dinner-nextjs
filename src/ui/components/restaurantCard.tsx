@@ -1,3 +1,4 @@
+"use client";
 import { Box, Button, Card, Flex, Inset } from "@radix-ui/themes";
 import type { Restaurant } from "../../../generated/prisma";
 import Image from "next/image";
