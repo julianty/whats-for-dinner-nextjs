@@ -15,9 +15,19 @@ export default function RestaurantSelector({
   const [selectedRestaurants, setSelectedRestaurants] = useState<Restaurant[]>(
     []
   );
+  const [removedRestaurants, setRemovedRestaurants] = useState<Restaurant[]>(
+    []
+  );
 
   const addRestaurant = (restaurant: Restaurant) => {
     setSelectedRestaurants((prev) => {
+      if (prev.some((r) => r.id === restaurant.id)) return prev;
+      return [...prev, restaurant];
+    });
+  };
+
+  const removeRestaurant = (restaurant: Restaurant) => {
+    setRemovedRestaurants((prev) => {
       if (prev.some((r) => r.id === restaurant.id)) return prev;
       return [...prev, restaurant];
     });
@@ -33,16 +43,21 @@ export default function RestaurantSelector({
             Restaurant&quot; button.
           </p>
           {restaurants
-            .filter(
-              (restaurant) =>
-                !selectedRestaurants.some((r) => r.id === restaurant.id)
-            )
+            .filter((restaurant) => {
+              return (
+                !selectedRestaurants.some((r) => r.id === restaurant.id) &&
+                !removedRestaurants.some((r) => r.id === restaurant.id)
+              );
+            })
+            .slice(0, 5)
             .map((restaurant) => (
               <RestaurantCard
                 {...restaurant}
                 key={restaurant.id}
-                variant="horizontal"
-                onImageClick={() => addRestaurant(restaurant)}
+                // variant="horizontal"
+                variant="simple"
+                onAddClick={() => addRestaurant(restaurant)}
+                onRemoveClick={() => removeRestaurant(restaurant)}
               />
             ))}
         </Flex>
