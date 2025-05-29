@@ -4,10 +4,10 @@ import { notFound } from "next/navigation";
 interface SessionPageProps {
   params: { sessionid: string };
 }
-
 export default async function SessionPage({ params }: SessionPageProps) {
+  const { sessionid } = params;
   const session = await prisma.session.findUnique({
-    where: { id: params.sessionid },
+    where: { id: sessionid },
     include: {
       users: true,
       restaurants: true,
