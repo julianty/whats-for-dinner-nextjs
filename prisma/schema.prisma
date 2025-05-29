@@ -21,6 +21,7 @@ model Restaurant {
   description String?
   imageUrl    String?
   sessions    Session[] // Many-to-many with Session
+  choices     SessionChoice[]
 }
 
 model User {
@@ -29,6 +30,7 @@ model User {
   sessions SessionUser[]
   email String
   userEntries String[]
+  choices    SessionChoice[]
 }
 
 model Session {
@@ -37,6 +39,7 @@ model Session {
   users             SessionUser[]
   restaurants       Restaurant[]
   customEntries     String[]
+  choices            SessionChoice[]
 }
 
 model SessionUser {
@@ -46,4 +49,22 @@ model SessionUser {
   user      User     @relation(fields: [userId], references: [id])
   userId    String
   @@unique([sessionId, userId])
+}
+
+model SessionChoice {
+  id            String      @id @default(uuid())
+  session       Session     @relation(fields: [sessionId], references: [id])
+  sessionId     String
+  user          User?       @relation(fields: [userId], references: [id])
+  userId        String?     // Nullable for guests
+  guestName     String?     // For guest users
+  restaurant    Restaurant? @relation(fields: [restaurantId], references: [id])
+  restaurantId  String?     // Nullable if it's a custom entry
+  customEntry   String?     // For custom entries
+  choice        Boolean     // The user's choice (true/false)
+  createdAt     DateTime    @default(now())
+
+  @@index([sessionId])
+  @@index([userId])
+  @@index([restaurantId])
 }
