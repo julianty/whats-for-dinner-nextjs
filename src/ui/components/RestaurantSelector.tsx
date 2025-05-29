@@ -1,8 +1,14 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, FormEvent } from "react";
 import type { Restaurant } from "../../../generated/prisma";
 import RestaurantCard from "./restaurantCard";
-import { Button, Flex, Section } from "@radix-ui/themes";
+import {
+  Button,
+  Flex,
+  Section,
+  TextField,
+  ThickChevronRightIcon,
+} from "@radix-ui/themes";
 import { createSessionAction } from "@/lib/actions";
 
 interface RestaurantSelectorProps {
@@ -33,6 +39,27 @@ export default function RestaurantSelector({
     });
   };
 
+  const handleCustomOptionSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    const userEntry = formData.get("userEntry")?.toString();
+    if (!userEntry) return;
+    const userRestaurant: Restaurant = {
+      id: userEntry,
+      userCreated: true,
+      name: userEntry,
+      description: null,
+      imageUrl: null,
+    };
+    if (selectedRestaurants.some((restaurant) => restaurant.id == userEntry)) {
+      alert(`An option called ${userEntry} already exists!`);
+      event.currentTarget.reset();
+      return;
+    }
+    setSelectedRestaurants((prev) => [...prev, userRestaurant]);
+    event.currentTarget.reset();
+  };
+
   return (
     <>
       <Section>
@@ -61,7 +88,20 @@ export default function RestaurantSelector({
               />
             ))}
         </Flex>
-        <Button>Add Option</Button>
+        <form onSubmit={handleCustomOptionSubmit}>
+          <p>If you want to write in your own options, you can do that here!</p>
+          {/* <input type="text"></input> */}
+          <TextField.Root
+            placeholder="Your favorite restaurant/food"
+            className="max-w-96"
+            name="userEntry"
+          >
+            <TextField.Slot>
+              <ThickChevronRightIcon />
+            </TextField.Slot>
+          </TextField.Root>
+          <Button type="submit">Add Option</Button>
+        </form>
       </Section>
       {/* Debug output */}
       <Section>
@@ -72,14 +112,26 @@ export default function RestaurantSelector({
           </pre>
           {selectedRestaurants.length > 0 && (
             <form action={createSessionAction}>
-              {selectedRestaurants.map((r) => (
-                <input
-                  key={r.id}
-                  type="hidden"
-                  name="restaurantIds"
-                  value={r.id}
-                />
-              ))}
+              {selectedRestaurants
+                .filter((r) => r.userCreated == false)
+                .map((r) => (
+                  <input
+                    key={r.id}
+                    type="hidden"
+                    name="restaurantIds"
+                    value={r.id}
+                  />
+                ))}
+              {selectedRestaurants
+                .filter((r) => r.userCreated == true)
+                .map((r) => (
+                  <input
+                    key={r.id}
+                    type="hidden"
+                    name="userEntries"
+                    value={r.id}
+                  />
+                ))}
               <Button type="submit" className="mt-4">
                 Create Session
               </Button>

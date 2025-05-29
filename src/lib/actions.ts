@@ -3,8 +3,8 @@ import { prisma } from "./prisma";
 import { redirect } from "next/navigation";
 
 // Create a new user
-export async function createUser(name: string) {
-  return prisma.user.create({ data: { name } });
+export async function createUser(name: string, email: string) {
+  return prisma.user.create({ data: { name, email } });
 }
 
 // Get a user by ID
@@ -27,10 +27,12 @@ export async function createSession({
   access_with_link = true,
   userIds = [],
   restaurantIds = [],
+  userEntries = [],
 }: {
   access_with_link?: boolean;
   userIds?: string[];
   restaurantIds?: string[];
+  userEntries?: string[];
 }) {
   return prisma.session.create({
     data: {
@@ -42,6 +44,9 @@ export async function createSession({
       },
       restaurants: {
         connect: restaurantIds.map((id) => ({ id })),
+      },
+      customEntries: {
+        set: userEntries,
       },
     },
     include: { users: true, restaurants: true },
@@ -103,7 +108,8 @@ export async function deleteSession(id: string) {
 // Server action for creating a session and redirecting
 export async function createSessionAction(formData: FormData): Promise<void> {
   const restaurantIds = formData.getAll("restaurantIds").map(String);
-  const session = await createSession({ restaurantIds });
+  const userEntries = formData.getAll("userEntries").map(String);
+  const session = await createSession({ restaurantIds, userEntries });
   if (session && session.id) {
     redirect(`/sessions/${session.id}`);
   }
@@ -112,4 +118,19 @@ export async function createSessionAction(formData: FormData): Promise<void> {
 // Get all restaurants
 export async function getAllRestaurants() {
   return prisma.restaurant.findMany();
+}
+
+// Create a user defined restaurant/food
+
+export async function createUserEntry(userId: string, entryName: string) {
+  return prisma.user.update({
+    where: {
+      id: userId,
+    },
+    data: {
+      userEntries: {
+        push: entryName,
+      },
+    },
+  });
 }

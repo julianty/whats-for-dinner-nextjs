@@ -16,6 +16,7 @@ datasource db {
 
 model Restaurant {
   id          String   @id @default(uuid())
+  userCreated Boolean
   name        String
   description String?
   imageUrl    String?
@@ -27,6 +28,7 @@ model User {
   name  String
   sessions SessionUser[]
   email String
+  userEntries String[]
 }
 
 model Session {
@@ -34,6 +36,7 @@ model Session {
   access_with_link  Boolean  @default(true)
   users             SessionUser[]
   restaurants       Restaurant[]
+  customEntries     String[]
 }
 
 model SessionUser {

@@ -40,6 +40,7 @@ async function main() {
       return prisma.restaurant.create({
         data: {
           name,
+          userCreated: false,
           description: `A popular ${faker.food.ethnicCategory()} restaurant known for their ${faker.food.dish()}.`,
           imageUrl: faker.image.urlPicsumPhotos({ width: 300, height: 300 }),
         },
