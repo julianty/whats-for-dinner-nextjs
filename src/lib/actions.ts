@@ -134,3 +134,102 @@ export async function createUserEntry(userId: string, entryName: string) {
     },
   });
 }
+
+// Upsert a session choice
+export async function upsertSessionChoice({
+  sessionId,
+  userId,
+  guestName,
+  restaurantId,
+  customEntry,
+  choice,
+}: {
+  sessionId: string;
+  userId?: string;
+  guestName?: string;
+  restaurantId?: string;
+  customEntry?: string;
+  choice: boolean;
+}) {
+  // User + Restaurant
+  if (userId && restaurantId) {
+    return prisma.sessionChoice.upsert({
+      where: {
+        sessionId_userId_restaurantId: {
+          sessionId,
+          userId,
+          restaurantId,
+        },
+      },
+      update: { choice },
+      create: {
+        sessionId,
+        userId,
+        restaurantId,
+        choice,
+      },
+    });
+  }
+
+  // Guest + Restaurant
+  if (guestName && restaurantId) {
+    return prisma.sessionChoice.upsert({
+      where: {
+        sessionId_guestName_restaurantId: {
+          sessionId,
+          guestName,
+          restaurantId,
+        },
+      },
+      update: { choice },
+      create: {
+        sessionId,
+        guestName,
+        restaurantId,
+        choice,
+      },
+    });
+  }
+
+  // User + Custom Entry
+  if (userId && customEntry) {
+    return prisma.sessionChoice.upsert({
+      where: {
+        sessionId_userId_customEntry: {
+          sessionId,
+          userId,
+          customEntry,
+        },
+      },
+      update: { choice },
+      create: {
+        sessionId,
+        userId,
+        customEntry,
+        choice,
+      },
+    });
+  }
+
+  // Guest + Custom Entry
+  if (guestName && customEntry) {
+    return prisma.sessionChoice.upsert({
+      where: {
+        sessionId_guestName_customEntry: {
+          sessionId,
+          guestName,
+          customEntry,
+        },
+      },
+      update: { choice },
+      create: {
+        sessionId,
+        guestName,
+        customEntry,
+        choice,
+      },
+    });
+  }
+
+  throw new Error("Invalid combination of fields for upsertSessionChoice");
+}

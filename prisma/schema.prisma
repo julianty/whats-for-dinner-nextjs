@@ -67,4 +67,13 @@ model SessionChoice {
   @@index([sessionId])
   @@index([userId])
   @@index([restaurantId])
+
+  // Uniqueness for users and restaurants
+  @@unique([sessionId, userId, restaurantId])
+  // Uniqueness for guests and restaurants
+  @@unique([sessionId, guestName, restaurantId])
+  // Uniqueness for users and custom entries
+  @@unique([sessionId, userId, customEntry])
+  // Uniqueness for guests and custom entries
+  @@unique([sessionId, guestName, customEntry])
 }
