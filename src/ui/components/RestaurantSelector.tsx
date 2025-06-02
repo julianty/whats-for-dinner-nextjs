@@ -148,7 +148,11 @@ export default function RestaurantSelector({
                 />
               ))}
             <Flex>
-              <TextField.Root placeholder="Enter your name" name="userName">
+              <TextField.Root
+                placeholder="Enter your name"
+                name="userName"
+                required
+              >
                 <TextField.Slot>{""}</TextField.Slot>
               </TextField.Root>
               <Button type="submit" className="mt-4">
@@ -159,14 +163,14 @@ export default function RestaurantSelector({
         )}
       </Section>
       {/* Debug output */}
-      <Section>
+      {/* <Section>
         <div className="bg-[#222] text-white p-3 rounded mt-4">
           <strong>Selected Restaurants (debug):</strong>
           <pre className="whitespace-pre-wrap break-all">
             {JSON.stringify(selectedRestaurants, null, 2)}
           </pre>
         </div>
-      </Section>
+      </Section> */}
     </>
   );
 }

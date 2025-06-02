@@ -1,4 +1,5 @@
 "use server";
+import { SessionChoicePayload } from "@/types/sessionChoice";
 import { prisma } from "./prisma";
 import { redirect } from "next/navigation";
 
@@ -143,14 +144,7 @@ export async function upsertSessionChoice({
   restaurantId,
   customEntry,
   choice,
-}: {
-  sessionId: string;
-  userId?: string;
-  guestName?: string;
-  restaurantId?: string;
-  customEntry?: string;
-  choice: boolean;
-}) {
+}: SessionChoicePayload) {
   // User + Restaurant
   if (userId && restaurantId) {
     return prisma.sessionChoice.upsert({

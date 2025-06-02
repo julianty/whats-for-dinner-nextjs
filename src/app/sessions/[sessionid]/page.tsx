@@ -1,4 +1,6 @@
 import { prisma } from "@/lib/prisma";
+import DecisionComponent from "@/ui/components/decisionComponent";
+import SessionChoicesTable from "@/ui/components/SessionChoicesTable";
 import { Container, Flex } from "@radix-ui/themes";
 import { notFound } from "next/navigation";
 
@@ -19,6 +21,9 @@ export default async function SessionPage({ params }: SessionPageProps) {
     notFound();
   }
 
+  const restaurants = session.restaurants ?? null;
+  const customEntries = session.customEntries ?? null;
+
   return (
     <main className="p-8">
       <Container>
@@ -28,13 +33,18 @@ export default async function SessionPage({ params }: SessionPageProps) {
             You&apos;ve just been invited to help make a decision on dinner
             plans
           </p>
-          <p>Please see the options that were selected below</p>
+          <DecisionComponent
+            restaurants={restaurants}
+            customEntries={customEntries}
+            sessionid={sessionid}
+          />
         </Flex>
       </Container>
-      <h1 className="text-2xl font-bold mb-4">Session: {session.id}</h1>
+      {/* <h1 className="text-2xl font-bold mb-4">Session: {session.id}</h1>
       <pre className="p-4 rounded overflow-x-auto">
         {JSON.stringify(session, null, 2)}
-      </pre>
+      </pre> */}
+      <SessionChoicesTable sessionId={sessionid} />
     </main>
   );
 }
