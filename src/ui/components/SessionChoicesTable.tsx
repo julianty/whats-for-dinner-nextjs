@@ -38,7 +38,7 @@ export default async function SessionChoicesTable({
         .filter(Boolean) as string[]
     )
   );
-  const columns: string[] = [...users.map((u) => u.name), ...guestNames];
+  const columns: string[] = [...users.map((u) => u.name), ...guestNames, "&"];
 
   const restaurantRows = session.restaurants.map((r: Restaurant) => ({
     key: r.id,
@@ -73,19 +73,38 @@ export default async function SessionChoicesTable({
         </Table.Row>
       </Table.Header>
       <Table.Body>
-        {rows.map((row) => (
-          <Table.Row key={row.key}>
-            <Table.RowHeaderCell>{row.label}</Table.RowHeaderCell>
-            {columns.map((col) => {
-              const value = choiceMap.get(row.key + "::" + col);
-              return (
-                <Table.Cell key={col}>
-                  {value === true ? "✅" : value === false ? "❌" : ""}
-                </Table.Cell>
-              );
-            })}
-          </Table.Row>
-        ))}
+        {rows.map((row) => {
+          // Get the values for the first two columns (excluding "&")
+          const colKeys = columns.slice(0, -1); // all except "&"
+          const values = colKeys.map((col) =>
+            choiceMap.get(row.key + "::" + col)
+          );
+
+          // Compute the AND for the first two columns (adjust if you want more)
+          let andValue: boolean | undefined = undefined;
+          if (values.length >= 2) {
+            if (values[0] !== undefined && values[1] !== undefined) {
+              andValue = Boolean(values[0] && values[1]);
+            }
+          }
+
+          return (
+            <Table.Row key={row.key}>
+              <Table.RowHeaderCell>{row.label}</Table.RowHeaderCell>
+              {colKeys.map((col, idx) => {
+                const value = values[idx];
+                return (
+                  <Table.Cell key={col}>
+                    {value === true ? "✅" : value === false ? "❌" : ""}
+                  </Table.Cell>
+                );
+              })}
+              <Table.Cell key="and">
+                {andValue === undefined ? "" : andValue ? "✅" : "❌"}
+              </Table.Cell>
+            </Table.Row>
+          );
+        })}
       </Table.Body>
     </Table.Root>
   );
