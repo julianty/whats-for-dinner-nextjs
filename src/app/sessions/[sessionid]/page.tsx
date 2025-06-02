@@ -38,13 +38,13 @@ export default async function SessionPage({ params }: SessionPageProps) {
             customEntries={customEntries}
             sessionid={sessionid}
           />
+          {/* <h1 className="text-2xl font-bold mb-4">Session: {session.id}</h1>
+      <pre className="p-4 rounded overflow-x-auto">
+      {JSON.stringify(session, null, 2)}
+      </pre> */}
+          <SessionChoicesTable sessionId={sessionid} />
         </Flex>
       </Container>
-      {/* <h1 className="text-2xl font-bold mb-4">Session: {session.id}</h1>
-      <pre className="p-4 rounded overflow-x-auto">
-        {JSON.stringify(session, null, 2)}
-      </pre> */}
-      <SessionChoicesTable sessionId={sessionid} />
     </main>
   );
 }

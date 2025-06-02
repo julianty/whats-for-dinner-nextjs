@@ -17,7 +17,11 @@ export default async function Home() {
             </p>
           </Flex>
         </Section>
-        <RestaurantSelector restaurants={restaurants} />
+        <Section>
+          <Flex direction="column" justify="center">
+            <RestaurantSelector restaurants={restaurants} />
+          </Flex>
+        </Section>
       </Container>
     </main>
   );
