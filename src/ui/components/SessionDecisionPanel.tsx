@@ -113,7 +113,7 @@ const SessionDecisionPanel: React.FC<SessionDecisionPanelProps> = ({
           handleEntryDecision={handleEntryDecision}
         />
       )}
-      <Accordion type="single" collapsible>
+      <Accordion type="single" collapsible style={{ marginTop: "40px" }}>
         <AccordionItem value="1" disabled={!allDecided}>
           <AccordionHeader>
             <AccordionTrigger className="AccordionTrigger">

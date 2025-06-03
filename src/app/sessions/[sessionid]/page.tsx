@@ -2,7 +2,7 @@ import { prisma } from "@/lib/prisma";
 import { Container, Flex } from "@radix-ui/themes";
 import { notFound } from "next/navigation";
 import SessionDecisionPanel from "@/ui/components/SessionDecisionPanel";
-
+import { Text } from "@radix-ui/themes";
 interface SessionPageProps {
   params: { sessionid: string };
 }
@@ -27,7 +27,7 @@ export default async function SessionPage({ params }: SessionPageProps) {
     <main className="p-8">
       <Container my={"200px"}>
         <Flex direction={"column"} align={"center"} gap={"4"}>
-          <h1>Welcome! You made it to this session.</h1>
+          <Text size={"6"}>Welcome! You made it to this session.</Text>
           <SessionDecisionPanel
             restaurants={restaurants}
             customEntries={customEntries}

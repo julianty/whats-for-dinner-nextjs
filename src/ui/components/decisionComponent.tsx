@@ -2,6 +2,7 @@
 import React from "react";
 import { Restaurant } from "../../../generated/prisma";
 import EntryDecider from "./entryDecider";
+import { Flex } from "@radix-ui/themes";
 
 type DecisionComponentProps = {
   restaurants: Restaurant[];
@@ -21,7 +22,7 @@ function DecisionComponent({
   handleEntryDecision,
 }: DecisionComponentProps) {
   return (
-    <>
+    <Flex direction={"column"}>
       {restaurants.map((r) => (
         <EntryDecider
           key={r.id}
@@ -48,7 +49,7 @@ function DecisionComponent({
           }
         />
       ))}
-    </>
+    </Flex>
   );
 }
 
