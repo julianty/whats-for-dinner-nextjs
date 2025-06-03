@@ -105,7 +105,7 @@ function DecisionComponent({
             <EntryDecider
               key={r.id}
               name={r.name}
-              decided={decisions[r.id]}
+              decision={decisions[r.id]}
               onPositiveChoice={() =>
                 handleEntryDecision(r.id, true, { restaurantId: r.id })
               }
@@ -118,7 +118,7 @@ function DecisionComponent({
             <EntryDecider
               key={entry + idx}
               name={entry}
-              decided={decisions[entry + idx]}
+              decision={decisions[entry + idx]}
               onPositiveChoice={() =>
                 handleEntryDecision(entry + idx, true, { customEntry: entry })
               }
