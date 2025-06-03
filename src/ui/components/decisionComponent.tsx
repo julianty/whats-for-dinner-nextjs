@@ -22,7 +22,7 @@ function DecisionComponent({
   handleEntryDecision,
 }: DecisionComponentProps) {
   return (
-    <Flex direction={"column"}>
+    <Flex direction={"column"} gap={"3"}>
       {restaurants.map((r) => (
         <EntryDecider
           key={r.id}

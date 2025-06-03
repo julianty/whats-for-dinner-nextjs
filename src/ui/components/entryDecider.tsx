@@ -15,9 +15,9 @@ const EntryDecider: React.FC<EntryDeciderProps> = ({
   onNegativeChoice,
 }) => {
   return (
-    <Flex align="center" gap="2" justify={"between"}>
+    <Flex align="center" gap="4" justify={"between"}>
       <div>{name}</div>
-      <Flex>
+      <Flex gap={"1"}>
         <Button
           color={decision == false ? "gray" : "green"}
           onClick={onPositiveChoice}

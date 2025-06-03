@@ -9,7 +9,13 @@ import {
   AccordionTrigger,
   AccordionContent,
 } from "@radix-ui/react-accordion";
-import { Button, ChevronDownIcon, Flex, TextField } from "@radix-ui/themes";
+import {
+  Button,
+  Text,
+  ChevronDownIcon,
+  Flex,
+  TextField,
+} from "@radix-ui/themes";
 import { Restaurant } from "../../../generated/prisma";
 import "./styles.css";
 interface SessionDecisionPanelProps {
@@ -106,12 +112,18 @@ const SessionDecisionPanel: React.FC<SessionDecisionPanelProps> = ({
         </>
       )}
       {guestName && !acceptingName && (
-        <DecisionComponent
-          restaurants={restaurants}
-          customEntries={customEntries}
-          decisions={decisions}
-          handleEntryDecision={handleEntryDecision}
-        />
+        <section className="flex flex-col gap-4">
+          <Text>
+            Look over the options and make some decisions. <br /> The results
+            will be visible when you finish!
+          </Text>
+          <DecisionComponent
+            restaurants={restaurants}
+            customEntries={customEntries}
+            decisions={decisions}
+            handleEntryDecision={handleEntryDecision}
+          />
+        </section>
       )}
       <Accordion type="single" collapsible style={{ marginTop: "40px" }}>
         <AccordionItem value="1" disabled={!allDecided}>
