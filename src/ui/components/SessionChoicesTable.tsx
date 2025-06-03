@@ -1,46 +1,61 @@
+"use client";
 import React from "react";
-import { prisma } from "@/lib/prisma";
 import { Table } from "@radix-ui/themes";
-import type {
-  User,
-  SessionChoice,
-  Restaurant,
-} from "../../../generated/prisma";
 
 interface SessionChoicesTableProps {
   sessionId: string;
+  refreshKey?: number;
 }
 
-export default async function SessionChoicesTable({
+interface ApiSession {
+  sessionId: string;
+  users: Array<{ id: string; name: string }>;
+  restaurants: Array<{ id: string; name: string }>;
+  customEntries: string[];
+  choices: Array<{
+    userId?: string;
+    guestName?: string;
+    restaurantId?: string;
+    customEntry?: string;
+    choice: boolean;
+  }>;
+}
+
+const SessionChoicesTable: React.FC<SessionChoicesTableProps> = ({
   sessionId,
-}: SessionChoicesTableProps) {
-  // Fetch all session choices for this session, including user and restaurant info
-  const session = await prisma.session.findUnique({
-    where: { id: sessionId },
-    include: {
-      choices: {
-        include: {
-          user: true,
-          restaurant: true,
-        },
-      },
-      users: { include: { user: true } },
-      restaurants: true,
-    },
-  });
+  refreshKey,
+}) => {
+  const [session, setSession] = React.useState<ApiSession | null>(null);
+  const [loading, setLoading] = React.useState<boolean>(true);
+  const [error, setError] = React.useState<string | null>(null);
+
+  React.useEffect(() => {
+    setError(null);
+    fetch(`/api/session?sessionId=${encodeURIComponent(sessionId)}`)
+      .then((res) => {
+        if (!res.ok) throw new Error("Failed to fetch session data");
+        return res.json();
+      })
+      .then((data: ApiSession) => {
+        setLoading(false);
+        setSession(data);
+      })
+      .catch((err) => {
+        setLoading(false);
+        setError(err.message);
+      });
+  }, [sessionId, refreshKey]);
+  if (loading) return <div>Loading results...</div>;
+  if (error) return <div>Error: {error}</div>;
   if (!session) return <div>Session not found</div>;
 
-  const users: User[] = session.users.map((su) => su.user);
+  const users = session.users;
   const guestNames: string[] = Array.from(
-    new Set(
-      session.choices
-        .map((c: SessionChoice) => c.guestName)
-        .filter(Boolean) as string[]
-    )
+    new Set(session.choices.map((c) => c.guestName).filter(Boolean) as string[])
   );
   const columns: string[] = [...users.map((u) => u.name), ...guestNames, "&"];
 
-  const restaurantRows = session.restaurants.map((r: Restaurant) => ({
+  const restaurantRows = session.restaurants.map((r) => ({
     key: r.id,
     label: r.name,
     isCustom: false,
@@ -54,7 +69,7 @@ export default async function SessionChoicesTable({
 
   // Build a lookup for choices: rowKey x colKey => choice
   const choiceMap = new Map<string, boolean>();
-  for (const c of session.choices as SessionChoice[]) {
+  for (const c of session.choices) {
     const rowKey = c.restaurantId || c.customEntry;
     const colKey = c.userId || c.guestName;
     if (rowKey && colKey) {
@@ -108,4 +123,6 @@ export default async function SessionChoicesTable({
       </Table.Body>
     </Table.Root>
   );
-}
+};
+
+export default SessionChoicesTable;
