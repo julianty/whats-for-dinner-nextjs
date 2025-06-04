@@ -1,6 +1,6 @@
 import { getAllRestaurants } from "@/lib/actions";
 import RestaurantSelector from "@/ui/components/RestaurantSelector";
-import { Container, Flex, Section } from "@radix-ui/themes";
+import { Container, Heading, Text, Flex, Section } from "@radix-ui/themes";
 
 export default async function Home() {
   const restaurants = await getAllRestaurants();
@@ -9,15 +9,16 @@ export default async function Home() {
       <Container size="2">
         <Section>
           <Flex direction="column" gap="3">
-            <h1 className="text-4xl">Welcome to What&apos;s for Dinner!</h1>
-            <p>
+            <Heading className="text-4xl">
+              Welcome to What&apos;s for Dinner!
+            </Heading>
+            <Text>
               This is a simple app that helps you decide what to have for
-              dinner. You can add your favorite recipes and the app will
-              randomly select one for you.
-            </p>
+              dinner.
+              <br /> You can add your favorite recipes and the app will randomly
+              select one for you.
+            </Text>
           </Flex>
-        </Section>
-        <Section>
           <Flex direction="column" justify="center">
             <RestaurantSelector restaurants={restaurants} />
           </Flex>
