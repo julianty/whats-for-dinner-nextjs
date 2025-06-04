@@ -10,10 +10,10 @@ const prisma = new PrismaClient();
 
 async function main() {
   // Remove existing data
+  await prisma.sessionChoice.deleteMany();
   await prisma.session.deleteMany();
   await prisma.user.deleteMany();
   await prisma.restaurant.deleteMany();
-  await prisma.sessionChoice.deleteMany();
 
   // Create users
   const users = await Promise.all(
