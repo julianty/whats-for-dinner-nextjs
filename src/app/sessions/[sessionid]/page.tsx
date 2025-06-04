@@ -3,11 +3,12 @@ import { Container, Flex } from "@radix-ui/themes";
 import { notFound } from "next/navigation";
 import SessionDecisionPanel from "@/ui/components/SessionDecisionPanel";
 import { Text } from "@radix-ui/themes";
-interface SessionPageProps {
-  params: { sessionid: string };
-}
-export default async function SessionPage({ params }: SessionPageProps) {
-  const { sessionid } = params;
+export default async function SessionPage({
+  params,
+}: {
+  params: Promise<{ sessionid: string }>;
+}) {
+  const { sessionid } = await params;
   const session = await prisma.session.findUnique({
     where: { id: sessionid },
     include: {
