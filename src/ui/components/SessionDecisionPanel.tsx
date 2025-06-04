@@ -36,6 +36,13 @@ const SessionDecisionPanel: React.FC<SessionDecisionPanelProps> = ({
   const [guestName, setGuestName] = React.useState<string>("");
   const [acceptingName, setAcceptingName] = React.useState<boolean>(true);
 
+  // Check if userName exists in localStorage
+  React.useEffect(() => {
+    const userName = localStorage.getItem("userName");
+    console.log(userName);
+    if (userName) setGuestName(userName);
+  }, []);
+
   // Calculate if all decisions have been made
   const totalEntries =
     (restaurants?.length || 0) + (customEntries?.length || 0);
@@ -128,13 +135,11 @@ const SessionDecisionPanel: React.FC<SessionDecisionPanelProps> = ({
       <Accordion type="single" collapsible style={{ marginTop: "40px" }}>
         <AccordionItem value="1" disabled={!allDecided}>
           <AccordionHeader>
-            <AccordionTrigger className="AccordionTrigger">
-              <Flex align={"center"} gap={"4"}>
-                <Button variant="ghost" disabled={!allDecided}>
-                  Show Results
-                  <ChevronDownIcon className="AccordionChevron" aria-hidden />
-                </Button>
-              </Flex>
+            <AccordionTrigger asChild className="AccordionTrigger">
+              <Button variant="ghost" disabled={!allDecided}>
+                Show Results
+                <ChevronDownIcon className="AccordionChevron" aria-hidden />
+              </Button>
             </AccordionTrigger>
           </AccordionHeader>
           <AccordionContent>
