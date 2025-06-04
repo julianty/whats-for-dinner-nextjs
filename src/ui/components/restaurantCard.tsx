@@ -1,5 +1,13 @@
 "use client";
-import { Box, Button, Card, Flex, Inset } from "@radix-ui/themes";
+import {
+  Box,
+  Button,
+  Card,
+  Flex,
+  Inset,
+  Heading,
+  Text,
+} from "@radix-ui/themes";
 import type { Restaurant } from "../../../generated/prisma";
 import Image from "next/image";
 import React, { useState } from "react";
@@ -24,7 +32,14 @@ function RestaurantCard({
     return (
       <Card style={{ minWidth: "500px" }}>
         <Flex justify={"between"}>
-          <h3>{name}</h3>
+          <Flex direction={"column"}>
+            <Heading as="h3" size={"4"}>
+              {name}
+            </Heading>
+            <Text size={"2"} ml={"2"} color="gray">
+              {description}
+            </Text>
+          </Flex>
           <Inset asChild part="right">
             <Flex
               direction={"column"}
