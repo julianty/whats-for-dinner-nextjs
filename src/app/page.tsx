@@ -9,16 +9,18 @@ export default async function Home() {
       <Container size="2">
         <Section>
           <Flex direction="column" gap="3">
-            <Heading className="text-4xl">
-              Welcome to What&apos;s for Dinner!
+            <Heading as="h1" size={"8"}>
+              What&apos;s for Dinner?
             </Heading>
-            <Text>
+            <Text as="p" size={"2"}>
               This is a simple app that helps you decide what to have for
               dinner.
               <br /> You can add your favorite recipes and the app will randomly
               select one for you.
             </Text>
           </Flex>
+        </Section>
+        <Section>
           <Flex direction="column" justify="center">
             <RestaurantSelector restaurants={restaurants} />
           </Flex>

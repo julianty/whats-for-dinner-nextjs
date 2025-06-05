@@ -6,11 +6,14 @@ import {
   Box,
   Button,
   Flex,
+  IconButton,
+  Separator,
   Text,
   TextField,
   ThickChevronRightIcon,
 } from "@radix-ui/themes";
 import { createSessionAction } from "@/lib/actions";
+import { Cross2Icon } from "@radix-ui/react-icons";
 
 interface RestaurantSelectorProps {
   restaurants: Restaurant[];
@@ -67,20 +70,38 @@ export default function RestaurantSelector({
     localStorage.setItem("userName", userName);
   };
 
+  const handleRemoveFromSelected = (id: string) => {
+    setSelectedRestaurants((prev) => prev.filter((r) => r.id != id));
+  };
+
   return (
-    <>
-      <Text my={"4"}>
+    <Box>
+      <Text>
         Let&apos;s get started by selecting a restaurant from the list below.
         You can add your own restaurants by clicking the &quot;Add
         Restaurant&quot; button.
       </Text>
-      <Flex
-        gap="3"
-        direction={"column"}
-        justify={"center"}
-        maxWidth={"500px"}
-        my={"8"}
-      >
+      <Separator my={"4"} size={"4"} />
+      <Flex gap="3" direction={"column"} align={"center"}>
+        <Flex direction={"column"} align={"center"}>
+          <Text>
+            If you want to write in your own options, you can do that here!
+          </Text>
+          <form onSubmit={handleCustomOptionSubmit}>
+            <Flex>
+              <TextField.Root
+                placeholder="Your favorite restaurant/food"
+                name="userEntry"
+                style={{ minWidth: "300px" }}
+              >
+                <TextField.Slot>
+                  <ThickChevronRightIcon />
+                </TextField.Slot>
+              </TextField.Root>
+              <Button type="submit">Add Option</Button>
+            </Flex>
+          </form>
+        </Flex>
         {restaurants
           .filter((restaurant) => {
             return (
@@ -93,37 +114,31 @@ export default function RestaurantSelector({
             <RestaurantCard
               {...restaurant}
               key={restaurant.id}
-              // variant="horizontal"
               variant="simple"
               onAddClick={() => addRestaurant(restaurant)}
               onRemoveClick={() => removeRestaurant(restaurant)}
             />
           ))}
       </Flex>
-      <form onSubmit={handleCustomOptionSubmit}>
-        <Text>
-          If you want to write in your own options, you can do that here!
-        </Text>
-        <TextField.Root
-          placeholder="Your favorite restaurant/food"
-          className="max-w-96"
-          name="userEntry"
-        >
-          <TextField.Slot>
-            <ThickChevronRightIcon />
-          </TextField.Slot>
-        </TextField.Root>
-        <Button type="submit">Add Option</Button>
-      </form>
+      <Separator my={"4"} size={"4"} />
       {selectedRestaurants.length > 0 && (
         <Box my={"4"}>
           <Text>
-            Here&apos;s what you&apos;ve selected so far, if it looks good, you
-            can hit the start session button to start!
+            Here&apos;s what you&apos;ve selected so far. <br /> If it looks
+            good, you can hit the start session button to start!
           </Text>
           <ul>
             {selectedRestaurants.map((r) => (
-              <li key={r.id}>{r.name}</li>
+              <Flex key={r.id} align={"center"} gap={"3"}>
+                <IconButton
+                  variant="ghost"
+                  color="red"
+                  onClick={() => handleRemoveFromSelected(r.id)}
+                >
+                  <Cross2Icon />
+                </IconButton>
+                <li>{r.name}</li>
+              </Flex>
             ))}
           </ul>
         </Box>
@@ -160,6 +175,6 @@ export default function RestaurantSelector({
           </Flex>
         </form>
       )}
-    </>
+    </Box>
   );
 }
