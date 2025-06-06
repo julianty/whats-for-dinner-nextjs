@@ -88,11 +88,9 @@ function RestaurantCard({
           <Flex gap={"2"} direction={"column"}>
             <Button radius="large" color="tomato" onClick={onRemoveClick}>
               <Cross2Icon />
-              del
             </Button>
             <Button radius="large" color="grass" onClick={onAddClick}>
               <PlusIcon />
-              add
             </Button>
           </Flex>
         </Flex>
