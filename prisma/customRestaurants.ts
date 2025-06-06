@@ -1,5 +1,6 @@
 // prisma/customRestaurants.ts
 // 40 sample San Diego restaurant entries for seeding
+import { PriceRating, RestaurantTag } from "../generated/prisma";
 
 const SAN_DIEGO_IMAGE_URL =
   "https://plus.unsplash.com/premium_vector-1689096693986-e591cd6f2043?q=80&w=2360&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
@@ -10,7 +11,7 @@ export const customRestaurants = [
     userCreated: false,
     description: "Famous for ribs and barbecue in San Diego.",
     imageUrl: SAN_DIEGO_IMAGE_URL,
-    priceRating: "TWO",
+    priceRating: PriceRating.TWO,
     userRating: 4.6,
   },
   {
@@ -18,7 +19,7 @@ export const customRestaurants = [
     userCreated: false,
     description: "Iconic burger joint in Ocean Beach.",
     imageUrl: SAN_DIEGO_IMAGE_URL,
-    priceRating: "ONE",
+    priceRating: PriceRating.ONE,
     userRating: 4.7,
   },
   {
@@ -26,8 +27,8 @@ export const customRestaurants = [
     userCreated: false,
     description: "Casual spot for fried chicken and egg sandwiches.",
     imageUrl: SAN_DIEGO_IMAGE_URL,
-    tags: ["VEGETARIAN"],
-    priceRating: "TWO",
+    tags: [RestaurantTag.VEGETARIAN],
+    priceRating: PriceRating.TWO,
     userRating: 4.5,
   },
   {
@@ -35,8 +36,8 @@ export const customRestaurants = [
     userCreated: false,
     description: "Creative tacos and wrestling-themed decor.",
     imageUrl: SAN_DIEGO_IMAGE_URL,
-    tags: ["VEGETARIAN"],
-    priceRating: "ONE",
+    tags: [RestaurantTag.VEGETARIAN],
+    priceRating: PriceRating.ONE,
     userRating: 4.6,
   },
   {
@@ -44,7 +45,7 @@ export const customRestaurants = [
     userCreated: false,
     description: "Fresh seafood market and eatery by the bay.",
     imageUrl: SAN_DIEGO_IMAGE_URL,
-    priceRating: "THREE",
+    priceRating: PriceRating.THREE,
     userRating: 4.5,
   },
   {
@@ -52,8 +53,8 @@ export const customRestaurants = [
     userCreated: false,
     description: "Decadent cakes and desserts in a chic setting.",
     imageUrl: SAN_DIEGO_IMAGE_URL,
-    tags: ["VEGETARIAN"],
-    priceRating: "TWO",
+    tags: [RestaurantTag.VEGETARIAN],
+    priceRating: PriceRating.TWO,
     userRating: 4.6,
   },
   {
@@ -61,8 +62,8 @@ export const customRestaurants = [
     userCreated: false,
     description: "Trendy New American cuisine in Little Italy.",
     imageUrl: SAN_DIEGO_IMAGE_URL,
-    tags: ["VEGETARIAN"],
-    priceRating: "THREE",
+    tags: [RestaurantTag.VEGETARIAN],
+    priceRating: PriceRating.THREE,
     userRating: 4.6,
   },
   {
@@ -70,7 +71,7 @@ export const customRestaurants = [
     userCreated: false,
     description: "Upscale steakhouse with rooftop views.",
     imageUrl: SAN_DIEGO_IMAGE_URL,
-    priceRating: "THREE",
+    priceRating: PriceRating.THREE,
     userRating: 4.5,
   },
   {
@@ -78,8 +79,8 @@ export const customRestaurants = [
     userCreated: false,
     description: "Legendary spot for homemade Mexican food.",
     imageUrl: SAN_DIEGO_IMAGE_URL,
-    tags: ["VEGETARIAN"],
-    priceRating: "ONE",
+    tags: [RestaurantTag.VEGETARIAN],
+    priceRating: PriceRating.ONE,
     userRating: 4.6,
   },
   {
@@ -87,8 +88,8 @@ export const customRestaurants = [
     userCreated: false,
     description: "Rustic Italian fare and wine shop.",
     imageUrl: SAN_DIEGO_IMAGE_URL,
-    tags: ["VEGETARIAN"],
-    priceRating: "TWO",
+    tags: [RestaurantTag.VEGETARIAN],
+    priceRating: PriceRating.TWO,
     userRating: 4.6,
   },
   {
@@ -96,7 +97,7 @@ export const customRestaurants = [
     userCreated: false,
     description: "Seafood restaurant with harbor views.",
     imageUrl: SAN_DIEGO_IMAGE_URL,
-    priceRating: "THREE",
+    priceRating: PriceRating.THREE,
     userRating: 4.5,
   },
   {
@@ -104,8 +105,8 @@ export const customRestaurants = [
     userCreated: false,
     description: "Highly rated sushi in Pacific Beach.",
     imageUrl: SAN_DIEGO_IMAGE_URL,
-    tags: ["VEGETARIAN"],
-    priceRating: "THREE",
+    tags: [RestaurantTag.VEGETARIAN],
+    priceRating: PriceRating.THREE,
     userRating: 4.7,
   },
   {
@@ -113,7 +114,7 @@ export const customRestaurants = [
     userCreated: false,
     description: "Casual spot for fish tacos and ceviche.",
     imageUrl: SAN_DIEGO_IMAGE_URL,
-    priceRating: "TWO",
+    priceRating: PriceRating.TWO,
     userRating: 4.6,
   },
   {
@@ -121,8 +122,8 @@ export const customRestaurants = [
     userCreated: false,
     description: "California cuisine in a historic park setting.",
     imageUrl: SAN_DIEGO_IMAGE_URL,
-    tags: ["VEGETARIAN"],
-    priceRating: "THREE",
+    tags: [RestaurantTag.VEGETARIAN],
+    priceRating: PriceRating.THREE,
     userRating: 4.5,
   },
   {
@@ -130,8 +131,8 @@ export const customRestaurants = [
     userCreated: false,
     description: "Modern American eatery with rooftop lounge.",
     imageUrl: SAN_DIEGO_IMAGE_URL,
-    tags: ["VEGETARIAN"],
-    priceRating: "THREE",
+    tags: [RestaurantTag.VEGETARIAN],
+    priceRating: PriceRating.THREE,
     userRating: 4.5,
   },
   {
@@ -139,7 +140,7 @@ export const customRestaurants = [
     userCreated: false,
     description: "Gourmet tacos and craft cocktails.",
     imageUrl: SAN_DIEGO_IMAGE_URL,
-    priceRating: "TWO",
+    priceRating: PriceRating.TWO,
     userRating: 4.5,
   },
   {
@@ -147,7 +148,7 @@ export const customRestaurants = [
     userCreated: false,
     description: "Trendy seafood spot in Little Italy.",
     imageUrl: SAN_DIEGO_IMAGE_URL,
-    priceRating: "THREE",
+    priceRating: PriceRating.THREE,
     userRating: 4.5,
   },
   {
@@ -155,7 +156,7 @@ export const customRestaurants = [
     userCreated: false,
     description: "Popular for breakfast and brunch in La Jolla.",
     imageUrl: SAN_DIEGO_IMAGE_URL,
-    priceRating: "TWO",
+    priceRating: PriceRating.TWO,
     userRating: 4.6,
   },
   {
@@ -163,7 +164,7 @@ export const customRestaurants = [
     userCreated: false,
     description: "Farm-fresh comfort food and huge portions.",
     imageUrl: SAN_DIEGO_IMAGE_URL,
-    priceRating: "TWO",
+    priceRating: PriceRating.TWO,
     userRating: 4.5,
   },
   {
@@ -171,7 +172,7 @@ export const customRestaurants = [
     userCreated: false,
     description: "Fresh fish tacos and sandwiches.",
     imageUrl: SAN_DIEGO_IMAGE_URL,
-    priceRating: "TWO",
+    priceRating: PriceRating.TWO,
     userRating: 4.7,
   },
   {
@@ -179,7 +180,7 @@ export const customRestaurants = [
     userCreated: false,
     description: "Healthy breakfast and Latin-inspired dishes.",
     imageUrl: SAN_DIEGO_IMAGE_URL,
-    priceRating: "TWO",
+    priceRating: PriceRating.TWO,
     userRating: 4.6,
   },
   {
@@ -187,7 +188,7 @@ export const customRestaurants = [
     userCreated: false,
     description: "Farm-to-table eatery with global flavors.",
     imageUrl: SAN_DIEGO_IMAGE_URL,
-    priceRating: "TWO",
+    priceRating: PriceRating.TWO,
     userRating: 4.5,
   },
   {
@@ -195,8 +196,8 @@ export const customRestaurants = [
     userCreated: false,
     description: "Fresh salads and plates with local ingredients.",
     imageUrl: SAN_DIEGO_IMAGE_URL,
-    tags: ["VEGETARIAN"],
-    priceRating: "TWO",
+    tags: [RestaurantTag.VEGETARIAN],
+    priceRating: PriceRating.TWO,
     userRating: 4.5,
   },
   {
@@ -204,7 +205,7 @@ export const customRestaurants = [
     userCreated: false,
     description: "Modern comfort food in North Park.",
     imageUrl: SAN_DIEGO_IMAGE_URL,
-    priceRating: "TWO",
+    priceRating: PriceRating.TWO,
     userRating: 4.4,
   },
   {
@@ -212,7 +213,7 @@ export const customRestaurants = [
     userCreated: false,
     description: "Waterfront dining with skyline views.",
     imageUrl: SAN_DIEGO_IMAGE_URL,
-    priceRating: "THREE",
+    priceRating: PriceRating.THREE,
     userRating: 4.5,
   },
   {
@@ -220,8 +221,8 @@ export const customRestaurants = [
     userCreated: false,
     description: "Modern American comfort food and brunch.",
     imageUrl: SAN_DIEGO_IMAGE_URL,
-    tags: ["VEGETARIAN"],
-    priceRating: "TWO",
+    tags: [RestaurantTag.VEGETARIAN],
+    priceRating: PriceRating.TWO,
     userRating: 4.6,
   },
   {
@@ -229,8 +230,8 @@ export const customRestaurants = [
     userCreated: false,
     description: "Creative breakfast and brunch chain.",
     imageUrl: SAN_DIEGO_IMAGE_URL,
-    tags: ["VEGETARIAN"],
-    priceRating: "TWO",
+    tags: [RestaurantTag.VEGETARIAN],
+    priceRating: PriceRating.TWO,
     userRating: 4.6,
   },
   {
@@ -238,7 +239,7 @@ export const customRestaurants = [
     userCreated: false,
     description: "Upscale seafood and steakhouse.",
     imageUrl: SAN_DIEGO_IMAGE_URL,
-    priceRating: "THREE",
+    priceRating: PriceRating.THREE,
     userRating: 4.6,
   },
   {
@@ -246,7 +247,7 @@ export const customRestaurants = [
     userCreated: false,
     description: "Fine dining with panoramic city views.",
     imageUrl: SAN_DIEGO_IMAGE_URL,
-    priceRating: "THREE",
+    priceRating: PriceRating.THREE,
     userRating: 4.7,
   },
   {
@@ -254,7 +255,7 @@ export const customRestaurants = [
     userCreated: false,
     description: "Beloved Italian pizzeria and trattoria.",
     imageUrl: SAN_DIEGO_IMAGE_URL,
-    priceRating: "TWO",
+    priceRating: PriceRating.TWO,
     userRating: 4.7,
   },
   {
@@ -262,8 +263,8 @@ export const customRestaurants = [
     userCreated: false,
     description: "Vegan restaurant with a positive vibe.",
     imageUrl: SAN_DIEGO_IMAGE_URL,
-    tags: ["VEGAN"],
-    priceRating: "TWO",
+    tags: [RestaurantTag.VEGAN],
+    priceRating: PriceRating.TWO,
     userRating: 4.5,
   },
   {
@@ -271,7 +272,7 @@ export const customRestaurants = [
     userCreated: false,
     description: "Sushi bar with creative rolls and sake.",
     imageUrl: SAN_DIEGO_IMAGE_URL,
-    priceRating: "TWO",
+    priceRating: PriceRating.TWO,
     userRating: 4.5,
   },
   {
@@ -279,7 +280,7 @@ export const customRestaurants = [
     userCreated: false,
     description: "Authentic Tijuana-style tacos.",
     imageUrl: SAN_DIEGO_IMAGE_URL,
-    priceRating: "ONE",
+    priceRating: PriceRating.ONE,
     userRating: 4.7,
   },
   {
@@ -287,7 +288,7 @@ export const customRestaurants = [
     userCreated: false,
     description: "Asian fusion and pho in Ocean Beach.",
     imageUrl: SAN_DIEGO_IMAGE_URL,
-    priceRating: "TWO",
+    priceRating: PriceRating.TWO,
     userRating: 4.6,
   },
   {
@@ -295,7 +296,7 @@ export const customRestaurants = [
     userCreated: false,
     description: "Longtime Thai eatery with noodles and satay.",
     imageUrl: SAN_DIEGO_IMAGE_URL,
-    priceRating: "TWO",
+    priceRating: PriceRating.TWO,
     userRating: 4.5,
   },
   {
@@ -303,7 +304,7 @@ export const customRestaurants = [
     userCreated: false,
     description: "Family-run spot for classic Mexican fare.",
     imageUrl: SAN_DIEGO_IMAGE_URL,
-    priceRating: "ONE",
+    priceRating: PriceRating.ONE,
     userRating: 4.5,
   },
   {
@@ -311,7 +312,7 @@ export const customRestaurants = [
     userCreated: false,
     description: "Custom ice cream sandwiches.",
     imageUrl: SAN_DIEGO_IMAGE_URL,
-    priceRating: "TWO",
+    priceRating: PriceRating.TWO,
     userRating: 4.6,
   },
   {
@@ -319,7 +320,7 @@ export const customRestaurants = [
     userCreated: false,
     description: "Italian cafe for gelato and espresso.",
     imageUrl: SAN_DIEGO_IMAGE_URL,
-    priceRating: "TWO",
+    priceRating: PriceRating.TWO,
     userRating: 4.6,
   },
   {
@@ -327,7 +328,7 @@ export const customRestaurants = [
     userCreated: false,
     description: "Gourmet donuts and coffee downtown.",
     imageUrl: SAN_DIEGO_IMAGE_URL,
-    priceRating: "TWO",
+    priceRating: PriceRating.TWO,
     userRating: 4.7,
   },
   {
@@ -335,7 +336,7 @@ export const customRestaurants = [
     userCreated: false,
     description: "Old Town Mexican restaurant with handmade tortillas.",
     imageUrl: SAN_DIEGO_IMAGE_URL,
-    priceRating: "TWO",
+    priceRating: PriceRating.TWO,
     userRating: 4.4,
   },
   {
@@ -343,7 +344,7 @@ export const customRestaurants = [
     userCreated: false,
     description: "Craft brewery and restaurant with gardens.",
     imageUrl: SAN_DIEGO_IMAGE_URL,
-    priceRating: "THREE",
+    priceRating: PriceRating.THREE,
     userRating: 4.5,
   },
   {
@@ -351,7 +352,7 @@ export const customRestaurants = [
     userCreated: false,
     description: "Beachside breakfast and brunch in Pacific Beach.",
     imageUrl: SAN_DIEGO_IMAGE_URL,
-    priceRating: "ONE",
+    priceRating: PriceRating.ONE,
     userRating: 4.6,
   },
   {
@@ -359,7 +360,7 @@ export const customRestaurants = [
     userCreated: false,
     description: "Farm-to-table American cuisine in Mission Hills.",
     imageUrl: SAN_DIEGO_IMAGE_URL,
-    priceRating: "TWO",
+    priceRating: PriceRating.TWO,
     userRating: 4.5,
   },
 ];

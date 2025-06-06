@@ -32,7 +32,7 @@ model Restaurant {
   description String?
   imageUrl    String?
   userRating  Float @default(-1)
-  priceRating PriceRating
+  priceRating PriceRating @default(TWO)
   tags        RestaurantTag[]
   sessions    Session[] // Many-to-many with Session
   choices     SessionChoice[]

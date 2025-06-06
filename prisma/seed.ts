@@ -1,11 +1,10 @@
 // Number of users and restaurants to create
 const NUM_USERS = 10;
-const NUM_RESTAURANTS = 10;
+const NUM_RESTAURANTS = 30;
 
 import { PrismaClient } from "../generated/prisma";
 import { faker } from "@faker-js/faker";
 import { customRestaurants } from "./customRestaurants";
-
 const prisma = new PrismaClient();
 
 async function main() {
