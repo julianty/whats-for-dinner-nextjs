@@ -28,6 +28,7 @@ export default function RestaurantSelector({
   const [removedRestaurants, setRemovedRestaurants] = useState<Restaurant[]>(
     []
   );
+  const [searchQuery, setSearchQuery] = useState("");
 
   const addRestaurant = (restaurant: Restaurant) => {
     setSelectedRestaurants((prev) => {
@@ -74,6 +75,12 @@ export default function RestaurantSelector({
     setSelectedRestaurants((prev) => prev.filter((r) => r.id != id));
   };
 
+  const handleRestaurantEntryChange = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setSearchQuery(e.target.value);
+  };
+
   return (
     <Box>
       <Text>
@@ -93,6 +100,7 @@ export default function RestaurantSelector({
                 placeholder="Your favorite restaurant/food"
                 name="userEntry"
                 style={{ minWidth: "300px" }}
+                onChange={handleRestaurantEntryChange}
               >
                 <TextField.Slot>
                   <ThickChevronRightIcon />
@@ -109,6 +117,9 @@ export default function RestaurantSelector({
               !removedRestaurants.some((r) => r.id === restaurant.id)
             );
           })
+          .filter((r) =>
+            r.name.toLowerCase().includes(searchQuery.toLowerCase())
+          )
           .slice(0, 5)
           .map((restaurant) => (
             <RestaurantCard
