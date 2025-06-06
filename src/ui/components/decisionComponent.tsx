@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { Restaurant } from "../../../generated/prisma";
-import EntryDecider from "./entryDecider";
+import EntryDecider from "@/ui/components/EntryDecider";
 import { Flex } from "@radix-ui/themes";
 
 type DecisionComponentProps = {

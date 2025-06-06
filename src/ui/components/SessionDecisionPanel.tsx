@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import DecisionComponent from "./decisionComponent";
+import DecisionComponent from "./DecisionComponent";
 import SessionChoicesTable from "./SessionChoicesTable";
 import {
   Accordion,

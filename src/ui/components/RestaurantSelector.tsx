@@ -1,19 +1,12 @@
 "use client";
 import React, { useState, FormEvent } from "react";
 import type { Restaurant } from "../../../generated/prisma";
-import RestaurantCard from "./restaurantCard";
-import {
-  Box,
-  Button,
-  Flex,
-  IconButton,
-  Separator,
-  Text,
-  TextField,
-  ThickChevronRightIcon,
-} from "@radix-ui/themes";
-import { createSessionAction } from "@/lib/actions";
-import { Cross2Icon } from "@radix-ui/react-icons";
+import { Box, Flex, Separator, Text } from "@radix-ui/themes";
+
+import RestaurantSearchForm from "./RestaurantSearchForm";
+import RestaurantList from "./RestaurantList";
+import SelectedRestaurants from "./SelectedRestaurants";
+import CreateSessionForm from "./CreateSessionForm";
 
 interface RestaurantSelectorProps {
   restaurants: Restaurant[];
@@ -90,102 +83,32 @@ export default function RestaurantSelector({
       </Text>
       <Separator my={"4"} size={"4"} />
       <Flex gap="3" direction={"column"} align={"center"}>
-        <Flex direction={"column"} align={"center"} gap={"3"}>
-          <Text>
-            Start typing to search for a restaurant. If you can&apos;t find it,
-            you can add it as a custom entry!
-          </Text>
-          <form onSubmit={handleCustomOptionSubmit}>
-            <Flex gap="2">
-              <TextField.Root
-                placeholder="Your favorite restaurant/food"
-                name="userEntry"
-                style={{ minWidth: "350px" }}
-                onChange={handleRestaurantEntryChange}
-              >
-                <TextField.Slot>
-                  <ThickChevronRightIcon />
-                </TextField.Slot>
-              </TextField.Root>
-              <Button type="submit">Add Option</Button>
-            </Flex>
-          </form>
-        </Flex>
-        {restaurants
-          .filter((restaurant) => {
-            return (
-              !selectedRestaurants.some((r) => r.id === restaurant.id) &&
-              !removedRestaurants.some((r) => r.id === restaurant.id)
-            );
-          })
-          .filter((r) =>
-            r.name.toLowerCase().includes(searchQuery.toLowerCase())
-          )
-          .slice(0, 5)
-          .map((restaurant) => (
-            <RestaurantCard
-              {...restaurant}
-              key={restaurant.id}
-              variant="simple"
-              onAddClick={() => addRestaurant(restaurant)}
-              onRemoveClick={() => removeRestaurant(restaurant)}
-            />
-          ))}
+        <RestaurantSearchForm
+          searchQuery={searchQuery}
+          onSearchChange={handleRestaurantEntryChange}
+          onCustomOptionSubmit={handleCustomOptionSubmit}
+        />
+        <RestaurantList
+          restaurants={restaurants}
+          selectedRestaurants={selectedRestaurants}
+          removedRestaurants={removedRestaurants}
+          searchQuery={searchQuery}
+          onAdd={addRestaurant}
+          onRemove={removeRestaurant}
+        />
       </Flex>
       <Separator my={"4"} size={"4"} />
       {selectedRestaurants.length > 0 && (
-        <Box my={"4"}>
-          <Text>
-            Here&apos;s what you&apos;ve selected so far. <br /> If it looks
-            good, you can hit the start session button to start!
-          </Text>
-          <ul>
-            {selectedRestaurants.map((r) => (
-              <Flex key={r.id} align={"center"} gap={"3"}>
-                <IconButton
-                  variant="ghost"
-                  color="red"
-                  onClick={() => handleRemoveFromSelected(r.id)}
-                >
-                  <Cross2Icon />
-                </IconButton>
-                <li>{r.name}</li>
-              </Flex>
-            ))}
-          </ul>
-        </Box>
+        <SelectedRestaurants
+          selectedRestaurants={selectedRestaurants}
+          onRemove={handleRemoveFromSelected}
+        />
       )}
       {selectedRestaurants.length > 0 && (
-        <form action={createSessionAction}>
-          {selectedRestaurants
-            .filter((r) => r.userCreated == false)
-            .map((r) => (
-              <input
-                key={r.id}
-                type="hidden"
-                name="restaurantIds"
-                value={r.id}
-              />
-            ))}
-          {selectedRestaurants
-            .filter((r) => r.userCreated == true)
-            .map((r) => (
-              <input key={r.id} type="hidden" name="userEntries" value={r.id} />
-            ))}
-          <Flex>
-            <TextField.Root
-              placeholder="Enter your name"
-              name="userName"
-              onChange={handleUserNameChange}
-              required
-            >
-              <TextField.Slot>{""}</TextField.Slot>
-            </TextField.Root>
-            <Button type="submit" className="mt-4">
-              Create Session
-            </Button>
-          </Flex>
-        </form>
+        <CreateSessionForm
+          selectedRestaurants={selectedRestaurants}
+          onUserNameChange={handleUserNameChange}
+        />
       )}
     </Box>
   );
