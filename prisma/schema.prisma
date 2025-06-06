@@ -14,12 +14,26 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum RestaurantTag {
+  VEGETARIAN
+  VEGAN
+}
+
+enum PriceRating {
+  ONE
+  TWO
+  THREE
+}
+
 model Restaurant {
   id          String   @id @default(uuid())
   userCreated Boolean
   name        String
   description String?
   imageUrl    String?
+  userRating  Float @default(-1)
+  priceRating PriceRating
+  tags        RestaurantTag[]
   sessions    Session[] // Many-to-many with Session
   choices     SessionChoice[]
 }
