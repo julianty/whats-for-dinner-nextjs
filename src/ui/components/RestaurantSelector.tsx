@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, FormEvent } from "react";
-import type { Restaurant } from "../../../generated/prisma";
+import { PriceRating, type Restaurant } from "../../../generated/prisma";
 import { Box, Flex, Separator, Text } from "@radix-ui/themes";
 
 import RestaurantSearchForm from "./RestaurantSearchForm";
@@ -46,6 +46,9 @@ export default function RestaurantSelector({
       id: userEntry,
       userCreated: true,
       name: userEntry,
+      priceRating: PriceRating.TWO,
+      userRating: -1,
+      tags: [],
       description: null,
       imageUrl: null,
     };
