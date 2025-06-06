@@ -90,16 +90,17 @@ export default function RestaurantSelector({
       </Text>
       <Separator my={"4"} size={"4"} />
       <Flex gap="3" direction={"column"} align={"center"}>
-        <Flex direction={"column"} align={"center"}>
+        <Flex direction={"column"} align={"center"} gap={"3"}>
           <Text>
-            If you want to write in your own options, you can do that here!
+            Start typing to search for a restaurant. If you can&apos;t find it,
+            you can add it as a custom entry!
           </Text>
           <form onSubmit={handleCustomOptionSubmit}>
-            <Flex>
+            <Flex gap="2">
               <TextField.Root
                 placeholder="Your favorite restaurant/food"
                 name="userEntry"
-                style={{ minWidth: "300px" }}
+                style={{ minWidth: "350px" }}
                 onChange={handleRestaurantEntryChange}
               >
                 <TextField.Slot>
