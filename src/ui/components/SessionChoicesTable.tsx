@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { Table } from "@radix-ui/themes";
-
+import { green } from "@radix-ui/colors";
 interface SessionChoicesTableProps {
   sessionId: string;
   refreshKey?: number;
@@ -104,7 +104,10 @@ const SessionChoicesTable: React.FC<SessionChoicesTableProps> = ({
           }
 
           return (
-            <Table.Row key={row.key}>
+            <Table.Row
+              key={row.key}
+              style={{ backgroundColor: andValue ? green.green12 : "" }}
+            >
               <Table.RowHeaderCell>{row.label}</Table.RowHeaderCell>
               {colKeys.map((col, idx) => {
                 const value = values[idx];
