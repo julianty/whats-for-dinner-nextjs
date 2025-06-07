@@ -26,7 +26,8 @@ function DecisionComponent({
       {restaurants.map((r) => (
         <EntryDecider
           key={r.id}
-          name={r.name}
+          restaurant={r}
+          // name={r.name}
           decision={decisions[r.id]}
           onPositiveChoice={() =>
             handleEntryDecision(r.id, true, { restaurantId: r.id })
@@ -36,19 +37,32 @@ function DecisionComponent({
           }
         />
       ))}
-      {customEntries.map((entry, idx) => (
-        <EntryDecider
-          key={entry + idx}
-          name={entry}
-          decision={decisions[entry + idx]}
-          onPositiveChoice={() =>
-            handleEntryDecision(entry + idx, true, { customEntry: entry })
-          }
-          onNegativeChoice={() =>
-            handleEntryDecision(entry + idx, false, { customEntry: entry })
-          }
-        />
-      ))}
+      {customEntries.map((entry, idx) => {
+        const restaurantFromEntry: Restaurant = {
+          id: entry,
+          name: entry,
+          userCreated: true,
+          userRating: 0,
+          priceRating: "TWO",
+          description: "",
+          imageUrl: "",
+          tags: [],
+        };
+        return (
+          <EntryDecider
+            key={entry + idx}
+            // name={entry}
+            restaurant={restaurantFromEntry}
+            decision={decisions[entry + idx]}
+            onPositiveChoice={() =>
+              handleEntryDecision(entry + idx, true, { customEntry: entry })
+            }
+            onNegativeChoice={() =>
+              handleEntryDecision(entry + idx, false, { customEntry: entry })
+            }
+          />
+        );
+      })}
     </Flex>
   );
 }
