@@ -39,7 +39,6 @@ const SessionDecisionPanel: React.FC<SessionDecisionPanelProps> = ({
   // Check if userName exists in localStorage
   React.useEffect(() => {
     const userName = localStorage.getItem("userName");
-    console.log(userName);
     if (userName) setGuestName(userName);
   }, []);
 
@@ -85,13 +84,36 @@ const SessionDecisionPanel: React.FC<SessionDecisionPanelProps> = ({
     handleChoice({ choice: value, ...opts });
   };
 
-  const handleNameSubmit = (e: React.FormEvent) => {
+  // Define the type for guest choices returned by the API
+  interface GuestChoice {
+    restaurantId?: string;
+    customEntry?: string;
+    choice: boolean;
+  }
+
+  const handleNameSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!guestName) {
       alert("Please enter a name before submitting!");
       return;
     }
     setAcceptingName(false);
+    // Fetch guest choices for this session and guestName
+    const res = await fetch(
+      `/api/session/guest-choice?sessionId=${encodeURIComponent(
+        sessionid
+      )}&guestName=${encodeURIComponent(guestName)}`
+    );
+    if (res.ok) {
+      const guestChoices: GuestChoice[] = await res.json();
+      // Map guestChoices to { [key]: boolean } where key is restaurantId or customEntry
+      const mapped: { [key: string]: boolean } = {};
+      (guestChoices || []).forEach((c) => {
+        const key = c.restaurantId || c.customEntry;
+        if (key) mapped[key] = c.choice;
+      });
+      setDecisions(mapped);
+    }
   };
 
   return (
