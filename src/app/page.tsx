@@ -1,12 +1,19 @@
 import { getAllRestaurants } from "@/lib/actions";
 import RestaurantSelector from "@/ui/components/RestaurantSelector";
-import { Container, Heading, Text, Flex, Section } from "@radix-ui/themes";
+import {
+  Container,
+  Heading,
+  Text,
+  Flex,
+  Section,
+  Separator,
+} from "@radix-ui/themes";
 
 export default async function Home() {
   const restaurants = await getAllRestaurants();
   return (
     <main>
-      <Container size="2">
+      <Container size="2" mx={"4"}>
         <Section>
           <Flex direction="column" gap="3">
             <Heading as="h1" size={"8"}>
@@ -19,8 +26,7 @@ export default async function Home() {
               select one for you.
             </Text>
           </Flex>
-        </Section>
-        <Section>
+          <Separator my={"4"} size={"4"} />
           <Flex direction="column" justify="center">
             <RestaurantSelector restaurants={restaurants} />
           </Flex>

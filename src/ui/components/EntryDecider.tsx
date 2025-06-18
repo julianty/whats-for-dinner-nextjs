@@ -54,27 +54,9 @@ const EntryDecider: React.FC<EntryDeciderProps> = ({
   const cardColor =
     decision == true ? green.green12 : decision == false ? tomato.tomato12 : "";
   return (
-    // <Flex align="center" gap="4" justify={"between"}>
-    //   <div>{name}</div>
-    //   <Flex gap={"1"}>
-    //     <Button
-    //       color={decision == false ? "gray" : "green"}
-    //       onClick={onPositiveChoice}
-    //     >
-    //       Yes
-    //     </Button>
-    //     <Button
-    //       color={decision == true ? "gray" : "red"}
-    //       onClick={onNegativeChoice}
-    //     >
-    //       No
-    //     </Button>
-    //   </Flex>
-    // </Flex>
-
     <Card
       style={{
-        minWidth: "500px",
+        width: "100%",
         backgroundColor: cardColor,
       }}
     >
