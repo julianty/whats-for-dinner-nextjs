@@ -20,6 +20,7 @@ import {
 } from "@radix-ui/themes";
 import { Restaurant } from "../../../generated/prisma";
 import "./styles.css";
+import CopyLinkButton from "./CopyLinkButton";
 interface SessionDecisionPanelProps {
   restaurants: Restaurant[];
   customEntries: string[];
@@ -37,11 +38,14 @@ const SessionDecisionPanel: React.FC<SessionDecisionPanelProps> = ({
   const [refreshKey, setRefreshKey] = React.useState(0);
   const [guestName, setGuestName] = React.useState<string>("");
   const [acceptingName, setAcceptingName] = React.useState<boolean>(true);
-
+  const [fullUrl, setFullUrl] = React.useState("");
   // Check if userName exists in localStorage
   React.useEffect(() => {
     const userName = localStorage.getItem("userName");
     if (userName) setGuestName(userName);
+    if (typeof window !== "undefined") {
+      setFullUrl(window.location.href);
+    }
   }, []);
 
   // Calculate if all decisions have been made
@@ -178,6 +182,8 @@ const SessionDecisionPanel: React.FC<SessionDecisionPanelProps> = ({
           </AccordionContent>
         </AccordionItem>
       </Accordion>
+
+      <CopyLinkButton link={fullUrl} />
     </>
   );
 };
