@@ -16,6 +16,7 @@ import {
   Flex,
   TextField,
   Section,
+  Code,
 } from "@radix-ui/themes";
 import { Restaurant } from "../../../generated/prisma";
 import "./styles.css";
@@ -121,6 +122,7 @@ const SessionDecisionPanel: React.FC<SessionDecisionPanelProps> = ({
     <>
       {acceptingName && (
         <>
+          <Text size={"6"}>Welcome! You made it to this session.</Text>
           <p>
             First off, before we start making decisions, let&apos;s get you a
             name!
@@ -143,6 +145,9 @@ const SessionDecisionPanel: React.FC<SessionDecisionPanelProps> = ({
       )}
       {guestName && !acceptingName && (
         <Section className="flex flex-col gap-4">
+          <Text size={"6"}>
+            Welcome, <Code>{guestName}</Code>!
+          </Text>
           <Text>
             Look over the options and make some decisions. <br /> The results
             will be visible when you finish!
