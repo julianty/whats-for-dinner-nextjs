@@ -5,3 +5,29 @@
 .AccordionTrigger[data-state="open"] .AccordionChevron {
   transform: rotate(180deg);
 }
+
+@keyframes rowColorCycle {
+  0% {
+    background-color: #b9fbc0;
+  }
+  25% {
+    background-color: #f9f871;
+  }
+  50% {
+    background-color: #ffd6e0;
+  }
+  75% {
+    background-color: #a0c4ff;
+  }
+  100% {
+    background-color: #b9fbc0;
+  }
+}
+
+.tr-row-animate {
+  animation: rowColorCycle 4.2s linear infinite;
+}
+.tr-row-animate td,
+.tr-row-animate th {
+  color: #222 !important;
+}
