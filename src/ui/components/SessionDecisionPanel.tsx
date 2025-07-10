@@ -127,10 +127,10 @@ const SessionDecisionPanel: React.FC<SessionDecisionPanelProps> = ({
       {acceptingName && (
         <>
           <Text size={"6"}>Welcome to this session!</Text>
-          <p>
-            First off, before we start making decisions, let&apos;s get you a
+          <Text>
+            First off, before we start making decisions, let&apos;s confirm your
             name!
-          </p>
+          </Text>
           <form onSubmit={handleNameSubmit}>
             <Flex>
               <TextField.Root
@@ -164,13 +164,11 @@ const SessionDecisionPanel: React.FC<SessionDecisionPanelProps> = ({
           />
         </Section>
       )}
-      <Flex gap={"3"} align={"center"}>
-        <Text>Use this button</Text>
+      <Text>
+        Use this button
         <CopyLinkButton link={fullUrl} />
-        <Text>
-          to copy the link and share it with whomever is helping you decide!
-        </Text>
-      </Flex>
+        to copy the link and share it with whomever is helping you decide!
+      </Text>
 
       <Accordion type="single" collapsible style={{ marginTop: "40px" }}>
         <AccordionItem value="1" disabled={!allDecided}>

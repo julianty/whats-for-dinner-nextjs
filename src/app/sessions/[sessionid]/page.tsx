@@ -25,8 +25,8 @@ export default async function SessionPage({
 
   return (
     <main className="p-8">
-      <Container my={"200px"}>
-        <Flex direction={"column"} align={"center"} gap={"4"}>
+      <Container my={{ lg: "100px" }}>
+        <Flex direction={"column"} align={{ lg: "center" }} gap={"4"}>
           <SessionDecisionPanel
             restaurants={restaurants}
             customEntries={customEntries}

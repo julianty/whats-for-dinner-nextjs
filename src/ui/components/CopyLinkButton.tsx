@@ -11,7 +11,12 @@ function CopyLinkButton({ link }: { link: string }) {
     setTimeout(() => setCopied(false), 1500);
   };
   return (
-    <Button onClick={handleClick}>{copied ? "copied!" : "Copy Link"}</Button>
+    <Button
+      style={{ margin: "5px", verticalAlign: "middle" }}
+      onClick={handleClick}
+    >
+      {copied ? "copied!" : "Copy Link"}
+    </Button>
   );
 }
 
