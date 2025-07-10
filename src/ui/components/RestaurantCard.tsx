@@ -7,6 +7,7 @@ import {
   Text,
   Badge,
   Separator,
+  Box,
 } from "@radix-ui/themes";
 import { type Restaurant } from "../../../generated/prisma";
 // import Image from "next/image";
@@ -57,44 +58,46 @@ function RestaurantCard({
   })();
   if (variant == "simple") {
     return (
-      <Card size={"2"} style={{ width: "80%" }}>
-        <Flex justify={"between"}>
-          <Flex direction={"column"} gap={"1"}>
-            <Heading as="h3" size={"4"}>
-              {name}
-            </Heading>
-            <Flex gap={"4"} align={"center"}>
-              {Rating}
-              <Separator orientation={"vertical"} />
-              {
-                <Text size={"1"} color="amber">
-                  {priceRatingStr}
+      <Box width={{ lg: "80%" }}>
+        <Card size={"2"} style={{ width: "100%" }}>
+          <Flex justify={"between"} gap={"2"}>
+            <Flex direction={"column"} gap={"1"}>
+              <Heading as="h3" size={"4"}>
+                {name}
+              </Heading>
+              <Flex gap={"4"} align={"center"}>
+                {Rating}
+                <Separator orientation={"vertical"} />
+                {
+                  <Text size={"1"} color="amber">
+                    {priceRatingStr}
+                  </Text>
+                }
+                <Separator orientation={"vertical"} />
+                {tags?.map((t, index) => (
+                  // <div key={index}>{t}</div>
+                  <Badge color="green" key={index}>
+                    {t}
+                  </Badge>
+                ))}
+              </Flex>
+              <Flex gap={"3"}>
+                <Text size={"2"} color="gray">
+                  {description}
                 </Text>
-              }
-              <Separator orientation={"vertical"} />
-              {tags?.map((t, index) => (
-                // <div key={index}>{t}</div>
-                <Badge color="green" key={index}>
-                  {t}
-                </Badge>
-              ))}
+              </Flex>
             </Flex>
-            <Flex gap={"3"}>
-              <Text size={"2"} color="gray">
-                {description}
-              </Text>
+            <Flex justify={"between"} gap={"2"} direction={"column"}>
+              <Button radius="large" color="tomato" onClick={onRemoveClick}>
+                Hide <Cross2Icon />
+              </Button>
+              <Button radius="large" color="grass" onClick={onAddClick}>
+                Add <PlusIcon />
+              </Button>
             </Flex>
           </Flex>
-          <Flex gap={"2"} direction={"column"}>
-            <Button radius="large" color="tomato" onClick={onRemoveClick}>
-              <Cross2Icon />
-            </Button>
-            <Button radius="large" color="grass" onClick={onAddClick}>
-              <PlusIcon />
-            </Button>
-          </Flex>
-        </Flex>
-      </Card>
+        </Card>
+      </Box>
     );
   }
 }
