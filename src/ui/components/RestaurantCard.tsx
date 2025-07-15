@@ -58,7 +58,7 @@ function RestaurantCard({
   })();
   if (variant == "simple") {
     return (
-      <Box width={{ lg: "80%" }}>
+      <Box width={"100%"}>
         <Card size={"2"} style={{ width: "100%" }}>
           <Flex justify={"between"} gap={"2"}>
             <Flex direction={"column"} gap={"1"}>

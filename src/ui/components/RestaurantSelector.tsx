@@ -85,7 +85,13 @@ export default function RestaurantSelector({
         Restaurant&quot; button.
       </Text>
       <Separator my={"4"} size={"4"} />
-      <Flex gap="3" direction={"column"} align={"center"}>
+      <Flex
+        mx={"auto"}
+        width={{ lg: "80%" }}
+        gap="3"
+        direction={"column"}
+        align={"center"}
+      >
         <RestaurantSearchForm
           searchQuery={searchQuery}
           onSearchChange={handleRestaurantEntryChange}
