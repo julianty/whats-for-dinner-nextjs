@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, FormEvent } from "react";
 import { PriceRating, type Restaurant } from "../../../generated/prisma";
-import { Box, Flex, Separator, Text } from "@radix-ui/themes";
+import { Box, Flex, Separator } from "@radix-ui/themes";
 
 import RestaurantSearchForm from "./RestaurantSearchForm";
 import RestaurantList from "./RestaurantList";
@@ -79,19 +79,7 @@ export default function RestaurantSelector({
 
   return (
     <Box>
-      <Text>
-        Let&apos;s get started by selecting a restaurant from the list below.
-        You can add your own restaurants by clicking the &quot;Add
-        Restaurant&quot; button.
-      </Text>
-      <Separator my={"4"} size={"4"} />
-      <Flex
-        mx={"auto"}
-        width={{ lg: "80%" }}
-        gap="3"
-        direction={"column"}
-        align={"center"}
-      >
+      <Flex mx={"auto"} gap="3" direction={"column"} align={"center"}>
         <RestaurantSearchForm
           searchQuery={searchQuery}
           onSearchChange={handleRestaurantEntryChange}

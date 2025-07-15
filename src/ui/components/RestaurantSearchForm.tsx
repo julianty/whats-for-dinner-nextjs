@@ -13,17 +13,18 @@ const RestaurantSearchForm: React.FC<RestaurantSearchFormProps> = ({
   onSearchChange,
   onCustomOptionSubmit,
 }) => (
-  <Flex direction="column" align="center" gap="3">
+  <Flex width={"100%"} direction="column" align="center" gap="3">
     <Text size={"2"}>
       Start typing to search for a restaurant. If you can&apos;t find it, you
       can add it as a custom entry!
     </Text>
-    <form onSubmit={onCustomOptionSubmit}>
+    <form style={{ width: "100%" }} onSubmit={onCustomOptionSubmit}>
       <Flex gap="2">
         <TextField.Root
-          placeholder="Add a restaurant/food"
+          placeholder="Search or add a custom entry"
           name="userEntry"
-          style={{ minWidth: "200px" }}
+          // style={{ minWidth: "200px" }}
+          style={{ width: "100%" }}
           value={searchQuery}
           onChange={onSearchChange}
         >

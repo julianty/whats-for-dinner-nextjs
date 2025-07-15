@@ -1,6 +1,7 @@
 import React from "react";
 import type { Restaurant } from "../../../generated/prisma";
 import RestaurantCard from "./RestaurantCard";
+import { Flex } from "@radix-ui/themes";
 
 interface RestaurantListProps {
   restaurants: Restaurant[];
@@ -20,7 +21,11 @@ const RestaurantList: React.FC<RestaurantListProps> = ({
   onRemove,
 }) => {
   return (
-    <>
+    <Flex
+      direction={"column"}
+      gap={"2"}
+      style={{ maxHeight: "400px", overflowY: "auto" }}
+    >
       {restaurants
         .filter(
           (restaurant) =>
@@ -28,7 +33,7 @@ const RestaurantList: React.FC<RestaurantListProps> = ({
             !removedRestaurants.some((r) => r.id === restaurant.id)
         )
         .filter((r) => r.name.toLowerCase().includes(searchQuery.toLowerCase()))
-        .slice(0, 5)
+        // .slice(0, 5)
         .map((restaurant) => (
           <RestaurantCard
             {...restaurant}
@@ -38,7 +43,7 @@ const RestaurantList: React.FC<RestaurantListProps> = ({
             onRemoveClick={() => onRemove(restaurant)}
           />
         ))}
-    </>
+    </Flex>
   );
 };
 

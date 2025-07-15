@@ -13,7 +13,7 @@ export default async function Home() {
   const restaurants = await getAllRestaurants();
   return (
     <main>
-      <Container size="2" mx={"4"}>
+      <Container size={"1"} mx={"4"}>
         <Section>
           <Flex direction="column" gap="3">
             <Heading as="h1" size={"8"}>
