@@ -13,14 +13,20 @@ const SelectedRestaurants: React.FC<SelectedRestaurantsProps> = ({
   onRemove,
 }) => (
   <Box my={"4"}>
-    <Text>Here&apos;s what you&apos;ve selected so far.</Text>
-    <ul>
-      {selectedRestaurants.map((r) => (
-        <Flex key={r.id} align={"center"} gap={"3"}>
-          <SimpleCard heading={r.name} onRemove={() => onRemove(r.id)} />
+    <Flex direction={"column"} gap="3">
+      <Text>Here&apos;s what you&apos;ve selected so far.</Text>
+      <ul>
+        <Flex align={"center"} gap={"1"} direction={"column"}>
+          {selectedRestaurants.map((r) => (
+            <SimpleCard
+              key={r.id}
+              heading={r.name}
+              onRemove={() => onRemove(r.id)}
+            />
+          ))}
         </Flex>
-      ))}
-    </ul>
+      </ul>
+    </Flex>
   </Box>
 );
 
