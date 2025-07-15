@@ -1,6 +1,6 @@
 import React from "react";
 import type { Restaurant } from "../../../generated/prisma";
-import { Box, Button, Card, Flex, Heading, Text } from "@radix-ui/themes";
+import { Box, Button, Card, Flex, Strong, Text } from "@radix-ui/themes";
 import { Cross2Icon } from "@radix-ui/react-icons";
 
 interface SelectedRestaurantsProps {
@@ -41,9 +41,9 @@ const SimpleCard = ({
     <Box width={"100%"}>
       <Card>
         <Flex justify={"between"} align={"center"}>
-          <Heading as={"h3"} size="4">
-            {heading}
-          </Heading>
+          <Text>
+            <Strong>{heading}</Strong>
+          </Text>
           <Button size={"2"} color="tomato" onClick={onRemove}>
             remove <Cross2Icon />
           </Button>
