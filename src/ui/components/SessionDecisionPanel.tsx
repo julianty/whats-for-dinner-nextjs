@@ -17,10 +17,13 @@ import {
   TextField,
   Section,
   Code,
+  Card,
+  Heading,
 } from "@radix-ui/themes";
 import { Restaurant } from "../../../generated/prisma";
 import "./styles.css";
 import CopyLinkButton from "./CopyLinkButton";
+import { Label } from "@radix-ui/react-label";
 interface SessionDecisionPanelProps {
   restaurants: Restaurant[];
   customEntries: string[];
@@ -126,14 +129,15 @@ const SessionDecisionPanel: React.FC<SessionDecisionPanelProps> = ({
     <>
       {acceptingName && (
         <>
-          <Text size={"6"}>Welcome to this session!</Text>
-          <Text>
-            First off, before we start making decisions, let&apos;s confirm your
-            name!
-          </Text>
+          <Heading as="h1">Welcome to this session!</Heading>
+          {/* <Text>Let&apos;s first confirm your name!</Text> */}
           <form onSubmit={handleNameSubmit}>
-            <Flex>
+            <Label htmlFor="guestName" asChild>
+              <Text size={"1"}>Your name *</Text>
+            </Label>
+            <Flex gap="2">
               <TextField.Root
+                id="guestName"
                 name="guestName"
                 type="text"
                 value={guestName}
@@ -141,8 +145,11 @@ const SessionDecisionPanel: React.FC<SessionDecisionPanelProps> = ({
                 disabled={!acceptingName}
                 placeholder="enter a name!"
                 required={true}
+                className="flex-1"
               ></TextField.Root>
-              <Button type="submit">{"Lock me in"}</Button>
+              <Button type="submit" disabled={guestName == "" ? true : false}>
+                {"start picking!"}
+              </Button>
             </Flex>
           </form>
         </>
@@ -164,11 +171,14 @@ const SessionDecisionPanel: React.FC<SessionDecisionPanelProps> = ({
           />
         </Section>
       )}
-      <Text>
-        Use this button
-        <CopyLinkButton link={fullUrl} />
-        to copy the link and share it with whomever is helping you decide!
-      </Text>
+      <Card>
+        <Text size={"2"}>
+          Use this button
+          <CopyLinkButton link={fullUrl} />
+          to copy the link to this session and share it with whomever is helping
+          you decide!
+        </Text>
+      </Card>
 
       <Accordion type="single" collapsible style={{ marginTop: "40px" }}>
         <AccordionItem value="1" disabled={!allDecided}>

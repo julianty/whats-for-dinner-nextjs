@@ -13,6 +13,8 @@ function CopyLinkButton({ link }: { link: string }) {
   return (
     <Button
       style={{ margin: "5px", verticalAlign: "middle" }}
+      variant="soft"
+      size={"1"}
       onClick={handleClick}
     >
       {copied ? "copied!" : "Copy Link"}

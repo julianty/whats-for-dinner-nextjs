@@ -1,5 +1,5 @@
 import { prisma } from "@/lib/prisma";
-import { Container, Flex } from "@radix-ui/themes";
+import { Container, Flex, Section } from "@radix-ui/themes";
 import { notFound } from "next/navigation";
 import SessionDecisionPanel from "@/ui/components/SessionDecisionPanel";
 export default async function SessionPage({
@@ -24,15 +24,17 @@ export default async function SessionPage({
   const customEntries = session.customEntries ?? null;
 
   return (
-    <main className="p-8">
-      <Container my={{ lg: "100px" }}>
-        <Flex direction={"column"} align={{ lg: "center" }} gap={"4"}>
-          <SessionDecisionPanel
-            restaurants={restaurants}
-            customEntries={customEntries}
-            sessionid={sessionid}
-          />
-        </Flex>
+    <main>
+      <Container size="1" my={{ lg: "100px" }} mx={"4"}>
+        <Section>
+          <Flex direction={"column"} gap={"4"}>
+            <SessionDecisionPanel
+              restaurants={restaurants}
+              customEntries={customEntries}
+              sessionid={sessionid}
+            />
+          </Flex>
+        </Section>
       </Container>
     </main>
   );
