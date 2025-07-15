@@ -23,12 +23,13 @@ const CreateSessionForm: React.FC<CreateSessionFormProps> = ({
       .map((r) => (
         <input key={r.id} type="hidden" name="userEntries" value={r.id} />
       ))}
-    <Flex>
+    <Flex justify={"between"} gap="2">
       <TextField.Root
         placeholder="Enter your name"
         name="userName"
         onChange={onUserNameChange}
         required
+        className="flex-1"
       >
         <TextField.Slot>{""}</TextField.Slot>
       </TextField.Root>
