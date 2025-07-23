@@ -83,7 +83,19 @@ const SessionChoicesTable: React.FC<SessionChoicesTableProps> = ({
   const andedChoices: { [key: string]: string } = {};
 
   const handleRandomize = () => {
-    const keys = Object.keys(andedChoices);
+    let keys: string[] = [];
+    if (Object.values(andedChoices).length === 0) {
+      if (users.length + guestNames.length === 1) {
+        // solo mode: only select from positive choices
+        const colKey = users.length === 1 ? users[0].name : guestNames[0];
+        keys = rows
+          .filter((row) => choiceMap.get(row.key + "::" + colKey) === true)
+          .map((row) => row.key);
+      }
+      // The case where there are no overlaps (but not solo mode) - do nothing
+    } else {
+      keys = Object.keys(andedChoices);
+    }
     if (keys.length > 0) {
       const randomKey = keys[Math.floor(Math.random() * keys.length)];
       setChoice(randomKey);
@@ -170,7 +182,7 @@ const SessionChoicesTable: React.FC<SessionChoicesTableProps> = ({
         <div>
           <Button
             onClick={handleRandomize}
-            disabled={Object.values(andedChoices).length === 0}
+            // disabled={Object.values(andedChoices).length === 0}
           >
             {choice !== undefined ? "Choose again?" : "Choose one at random!"}
           </Button>

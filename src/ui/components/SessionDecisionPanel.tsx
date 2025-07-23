@@ -3,16 +3,8 @@ import React from "react";
 import DecisionComponent from "./DecisionComponent";
 import SessionChoicesTable from "./SessionChoicesTable";
 import {
-  Accordion,
-  AccordionItem,
-  AccordionHeader,
-  AccordionTrigger,
-  AccordionContent,
-} from "@radix-ui/react-accordion";
-import {
   Button,
   Text,
-  ChevronDownIcon,
   Flex,
   TextField,
   Section,
@@ -128,7 +120,7 @@ const SessionDecisionPanel: React.FC<SessionDecisionPanelProps> = ({
   return (
     <>
       {acceptingName && (
-        <>
+        <Section className="flex flex-col gap-4">
           <Heading as="h1">Welcome to this session!</Heading>
           {/* <Text>Let&apos;s first confirm your name!</Text> */}
           <form onSubmit={handleNameSubmit}>
@@ -152,7 +144,15 @@ const SessionDecisionPanel: React.FC<SessionDecisionPanelProps> = ({
               </Button>
             </Flex>
           </form>
-        </>
+          <Card>
+            <Text size={"2"}>
+              Use this button
+              <CopyLinkButton link={fullUrl} />
+              to copy the link to this session and share it with whomever is
+              helping you decide!
+            </Text>
+          </Card>
+        </Section>
       )}
       {guestName && !acceptingName && (
         <Section className="flex flex-col gap-4">
@@ -163,6 +163,14 @@ const SessionDecisionPanel: React.FC<SessionDecisionPanelProps> = ({
             Look over the options and make some decisions. <br /> The results
             will be visible when you finish!
           </Text>
+          <Card>
+            <Text size={"2"}>
+              Use this button
+              <CopyLinkButton link={fullUrl} />
+              to copy the link to this session and share it with whomever is
+              helping you decide!
+            </Text>
+          </Card>
           <DecisionComponent
             restaurants={restaurants}
             customEntries={customEntries}
@@ -171,33 +179,10 @@ const SessionDecisionPanel: React.FC<SessionDecisionPanelProps> = ({
           />
         </Section>
       )}
-      <Card>
-        <Text size={"2"}>
-          Use this button
-          <CopyLinkButton link={fullUrl} />
-          to copy the link to this session and share it with whomever is helping
-          you decide!
-        </Text>
-      </Card>
 
-      <Accordion type="single" collapsible style={{ marginTop: "40px" }}>
-        <AccordionItem value="1" disabled={!allDecided}>
-          <AccordionHeader>
-            <AccordionTrigger asChild className="AccordionTrigger">
-              <Button variant="ghost" disabled={!allDecided}>
-                Show Results
-                <ChevronDownIcon className="AccordionChevron" aria-hidden />
-              </Button>
-            </AccordionTrigger>
-          </AccordionHeader>
-          <AccordionContent>
-            <SessionChoicesTable
-              sessionId={sessionid}
-              refreshKey={refreshKey}
-            />
-          </AccordionContent>
-        </AccordionItem>
-      </Accordion>
+      {allDecided && (
+        <SessionChoicesTable sessionId={sessionid} refreshKey={refreshKey} />
+      )}
     </>
   );
 };
