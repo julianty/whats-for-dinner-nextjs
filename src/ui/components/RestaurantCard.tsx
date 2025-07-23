@@ -1,6 +1,5 @@
 "use client";
 import {
-  Button,
   Card,
   Flex,
   Heading,
@@ -8,11 +7,12 @@ import {
   Badge,
   Separator,
   Box,
+  IconButton,
 } from "@radix-ui/themes";
 import { type Restaurant } from "../../../generated/prisma";
 // import Image from "next/image";
 import React from "react";
-import { Cross2Icon, PlusIcon, StarFilledIcon } from "@radix-ui/react-icons";
+import { CheckIcon, Cross2Icon, StarFilledIcon } from "@radix-ui/react-icons";
 
 type RestaurantCardProps = Restaurant & {
   onAddClick: () => void;
@@ -88,12 +88,18 @@ function RestaurantCard({
               </Flex>
             </Flex>
             <Flex justify={"between"} gap={"2"} direction={"column"}>
-              <Button radius="large" color="tomato" onClick={onRemoveClick}>
+              <IconButton color="red" onClick={onRemoveClick}>
+                <Cross2Icon />
+              </IconButton>
+              <IconButton color="green" onClick={onAddClick}>
+                <CheckIcon />
+              </IconButton>
+              {/* <Button radius="large" color="tomato" onClick={onRemoveClick}>
                 Hide <Cross2Icon />
               </Button>
               <Button radius="large" color="grass" onClick={onAddClick}>
                 Add <PlusIcon />
-              </Button>
+              </Button> */}
             </Flex>
           </Flex>
         </Card>
